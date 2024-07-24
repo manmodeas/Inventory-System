@@ -134,7 +134,7 @@ public class DataBaseBackup extends javax.swing.JFrame {
             try {
 
                 Runtime runtime = Runtime.getRuntime();
-                p = runtime.exec("C:/Program Files (x86)/MySQL/MySQL Server 5.1/bin/mysqldump.exe -uroot -proot --add-drop-database -B inventorysystem -r "+TFPath.getText()+"/InventoryManagement.sql");
+                p = runtime.exec("C:/Program Files/MySQL/MySQL Server 8.0/bin/mysqldump.exe -uroot -proot --add-drop-database -B inventorysystem -r "+TFPath.getText()+"/InventoryManagement.sql");
                 //change the dbpass and dbname with your dbpass and dbname
                 int processComplete = p.waitFor();
 
