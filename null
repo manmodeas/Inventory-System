@@ -1,0 +1,430 @@
+-- MySQL dump 10.13  Distrib 5.1.26-rc, for Win32 (ia32)
+--
+-- Host: localhost    Database: inventorysystem
+-- ------------------------------------------------------
+-- Server version	5.1.26-rc-community
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `inventorysystem`
+--
+
+/*!40000 DROP DATABASE IF EXISTS `inventorysystem`*/;
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `inventorysystem` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `inventorysystem`;
+
+--
+-- Table structure for table `customer`
+--
+
+DROP TABLE IF EXISTS `customer`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `customer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `CustomerName` varchar(30) DEFAULT NULL,
+  `MobileNo` varchar(10) DEFAULT NULL,
+  `EmailID` varchar(40) DEFAULT NULL,
+  `Address` varchar(200) DEFAULT NULL,
+  `GSTINNo` varchar(15) DEFAULT NULL,
+  `AadharNo` varchar(12) DEFAULT NULL,
+  `CustomerID` varchar(30) DEFAULT NULL,
+  `Active` tinyint(1) NOT NULL DEFAULT '1',
+  `Dues` decimal(10,2) DEFAULT '0.00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `customer`
+--
+
+LOCK TABLES `customer` WRITE;
+/*!40000 ALTER TABLE `customer` DISABLE KEYS */;
+INSERT INTO `customer` VALUES (1,'Babu Bhaiya','4564567678','234545673456','HGJFHGDFG','12KJHGF1234G1G3','234545673456','ISCUST0',1,'54.75'),(2,'Bunty Bhaiya','4567834567','BuntyBhaiya123@gmail.com','Sector-14, Nagpur','23JHGFD3456F1F5','456556784567','ISCUST2',1,'0.00');
+/*!40000 ALTER TABLE `customer` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cutomerduesmanagement`
+--
+
+DROP TABLE IF EXISTS `cutomerduesmanagement`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `cutomerduesmanagement` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `CustomerID` varchar(45) DEFAULT NULL,
+  `DateofDue` date DEFAULT NULL,
+  `Due` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `cutomerduesmanagement`
+--
+
+LOCK TABLES `cutomerduesmanagement` WRITE;
+/*!40000 ALTER TABLE `cutomerduesmanagement` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cutomerduesmanagement` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `invoicetable`
+--
+
+DROP TABLE IF EXISTS `invoicetable`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `invoicetable` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `InvoiceID` varchar(30) DEFAULT NULL,
+  `SupplierID` varchar(30) DEFAULT NULL,
+  `DateofInvoice` date DEFAULT NULL,
+  `TotalAmount` decimal(10,2) DEFAULT '0.00',
+  `Discount` decimal(10,2) DEFAULT '0.00',
+  `PaidAmount` decimal(10,2) DEFAULT '0.00',
+  `Dues` decimal(10,2) DEFAULT '0.00',
+  `NetAmount` decimal(10,2) DEFAULT '0.00',
+  `PaymentMode` varchar(20) DEFAULT NULL,
+  `GrossAmount` decimal(10,2) DEFAULT '0.00',
+  `preDues` decimal(10,2) DEFAULT '0.00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `InvoiceID` (`InvoiceID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `invoicetable`
+--
+
+LOCK TABLES `invoicetable` WRITE;
+/*!40000 ALTER TABLE `invoicetable` DISABLE KEYS */;
+INSERT INTO `invoicetable` VALUES (1,'INVOID1','ISSUP1','2018-12-07','3150.00','5.00','2500.00','492.50','3000.00','Cash','2992.50','0.00'),(2,'INVOID2','ISSUP1','2018-12-07','3240.00','5.00','3000.00','570.50','3000.00','Cash','3078.00','492.50'),(3,'INVOID3','ISSUP2','2018-12-13','918.75','2.00','800.00','100.38','875.00','Cash','900.38','0.00'),(4,'INVOID4','ISSUP2','2018-12-13','1030.00','3.00','800.00','199.10','1000.00','Cash','999.10','100.38'),(5,'INVOID5','ISSUP1','2018-12-13','3360.00','5.00','3000.00','762.50','3200.00','Cash','3192.00','570.50'),(6,'INVOID6','ISSUP2','2018-12-13','1680.00','4.00','1000.00','811.90','1600.00','Cash','1612.80','199.10');
+/*!40000 ALTER TABLE `invoicetable` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `newperson`
+--
+
+DROP TABLE IF EXISTS `newperson`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `newperson` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `PersonName` varchar(45) DEFAULT NULL,
+  `MobileNo` varchar(10) DEFAULT NULL,
+  `EmailID` varchar(45) DEFAULT NULL,
+  `Address` varchar(200) DEFAULT NULL,
+  `Amount` decimal(10,2) DEFAULT '0.00',
+  `ToPay` tinyint(1) NOT NULL DEFAULT '0',
+  `ToReceive` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `PersonName` (`PersonName`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `newperson`
+--
+
+LOCK TABLES `newperson` WRITE;
+/*!40000 ALTER TABLE `newperson` DISABLE KEYS */;
+INSERT INTO `newperson` VALUES (1,'Aman Manmode','9890700119','amanmanmode27.am\"gmail.com','House No 149','1000.00',0,1);
+/*!40000 ALTER TABLE `newperson` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `product`
+--
+
+DROP TABLE IF EXISTS `product`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ProductId` varchar(20) DEFAULT NULL,
+  `Barcode` varchar(15) DEFAULT NULL,
+  `ProductName` varchar(40) DEFAULT NULL,
+  `ProductCategory` varchar(40) DEFAULT NULL,
+  `ProductBrand` varchar(40) DEFAULT NULL,
+  `ProductPurchasePrice` decimal(10,2) DEFAULT NULL,
+  `ProductWeight` int(11) DEFAULT NULL,
+  `ProductUOM` varchar(20) DEFAULT NULL,
+  `ProductExp` date DEFAULT NULL,
+  `ProductMfg` date DEFAULT NULL,
+  `ProductSellingPrice` int(11) DEFAULT NULL,
+  `ProductQuantity` int(11) DEFAULT NULL,
+  `ProductDescription` varchar(100) DEFAULT NULL,
+  `EXPNotifyDate` date DEFAULT NULL,
+  `Status` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `product`
+--
+
+LOCK TABLES `product` WRITE;
+/*!40000 ALTER TABLE `product` DISABLE KEYS */;
+INSERT INTO `product` VALUES (1,'ISProd1','3456345634564','Dove Anti Hairfall','Soap','Dove','300.00',380,'ml',NULL,NULL,350,0,'','2019-11-02','new'),(2,'ISProd1','3456345634564','Dove Anti Hairfall','Soap','Dove','320.00',380,'ml','2019-12-26','2018-12-01',350,10,'','2019-11-01','old'),(3,'ISProd2','4566345664565','Frooti','Soft Drink','Frooti','35.00',320,'ml','2019-12-20','2018-12-01',40,25,'','2019-11-01','old'),(4,'ISProd2','4566345664565','Frooti','Soft Drink','Frooti','35.00',320,'ml','2019-12-13','2018-12-01',40,0,'','2019-11-01','new'),(5,'ISProd3','7890345656786','Coca Cola','Soft Drink','Coca Cola','40.00',500,'ml','2018-12-01','2018-12-01',50,25,'','2018-11-01','old'),(6,'ISProd3','7890345656786','Coca Cola','Soft Drink','Coca Cola','34.00',500,'ml','2019-12-19','2018-12-01',50,0,'','2019-11-01','new'),(7,'ISProd4','4567456745678','THUMSUP','Soft Drink','THUMSUP','40.00',300,'ML','2019-12-02','2018-12-08',50,40,'','2019-11-01','old'),(8,'ISProd4','4567456745678','THUMSUP','Soft Drink','THUMSUP',NULL,300,'ML',NULL,NULL,50,NULL,'',NULL,'new');
+/*!40000 ALTER TABLE `product` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `productmaster`
+--
+
+DROP TABLE IF EXISTS `productmaster`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `productmaster` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ProductCategory` varchar(40) DEFAULT NULL,
+  `ProductName` varchar(40) DEFAULT NULL,
+  `ProductBrand` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `productmaster`
+--
+
+LOCK TABLES `productmaster` WRITE;
+/*!40000 ALTER TABLE `productmaster` DISABLE KEYS */;
+/*!40000 ALTER TABLE `productmaster` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `purchaseinvoice`
+--
+
+DROP TABLE IF EXISTS `purchaseinvoice`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `purchaseinvoice` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `InvoiceId` varchar(30) DEFAULT NULL,
+  `ProductId` varchar(20) DEFAULT NULL,
+  `SupplierId` varchar(30) DEFAULT NULL,
+  `DateofInvoice` date DEFAULT NULL,
+  `ProductPrice` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `ProductQuantity` int(11) DEFAULT NULL,
+  `GST` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `purchaseinvoice`
+--
+
+LOCK TABLES `purchaseinvoice` WRITE;
+/*!40000 ALTER TABLE `purchaseinvoice` DISABLE KEYS */;
+INSERT INTO `purchaseinvoice` VALUES (1,'INVOID1','ISProd1','ISSUP1','2018-12-07','300.00',10,5),(2,'INVOID2','ISProd1','ISSUP1','2018-12-07','300.00',10,8),(3,'INVOID3','ISProd2','ISSUP2','2018-12-13','35.00',25,5),(4,'INVOID4','ISProd3','ISSUP2','2018-12-13','40.00',25,3),(5,'INVOID5','ISProd1','ISSUP1','2018-12-13','320.00',10,5),(8,'INVOID6','ISProd4','ISSUP2','2018-12-13','40.00',40,5);
+/*!40000 ALTER TABLE `purchaseinvoice` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sellinvoice`
+--
+
+DROP TABLE IF EXISTS `sellinvoice`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `sellinvoice` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `InvoiceID` varchar(30) DEFAULT NULL,
+  `ProductID` varchar(30) DEFAULT NULL,
+  `CustomerID` varchar(30) DEFAULT NULL,
+  `DateofInvoice` date DEFAULT NULL,
+  `ProductPrice` decimal(10,2) DEFAULT '0.00',
+  `ProductQuantity` int(11) DEFAULT '0',
+  `GST` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `sellinvoice`
+--
+
+LOCK TABLES `sellinvoice` WRITE;
+/*!40000 ALTER TABLE `sellinvoice` DISABLE KEYS */;
+INSERT INTO `sellinvoice` VALUES (1,'SINVOID1','ISProd1','Retailer','2018-12-07','350.00',10,3),(2,'SINVOID2','ISProd1','ISCUST0','2018-12-07','350.00',10,5);
+/*!40000 ALTER TABLE `sellinvoice` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sellinvoicetable`
+--
+
+DROP TABLE IF EXISTS `sellinvoicetable`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `sellinvoicetable` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `InvoiceID` varchar(45) DEFAULT NULL,
+  `CustomerID` varchar(45) DEFAULT NULL,
+  `DateofInvoice` date DEFAULT NULL,
+  `TotalAmount` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `Discount` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `PaidAmount` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `Dues` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `NetAmount` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `PaymentMode` varchar(20) DEFAULT '0.00',
+  `GrossAmount` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `PreDues` decimal(10,2) NOT NULL DEFAULT '0.00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `InvoiceiD` (`InvoiceID`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `sellinvoicetable`
+--
+
+LOCK TABLES `sellinvoicetable` WRITE;
+/*!40000 ALTER TABLE `sellinvoicetable` DISABLE KEYS */;
+INSERT INTO `sellinvoicetable` VALUES (1,'SINVOID1','Retailer','2018-12-07','3605.00','3.00','3400.00','0.00','3500.00','Cash','3496.85','0.00'),(2,'SINVOID2','ISCUST0','2018-12-07','3675.00','3.00','3500.00','64.75','3500.00','Cash','3564.75','0.00');
+/*!40000 ALTER TABLE `sellinvoicetable` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `stock`
+--
+
+DROP TABLE IF EXISTS `stock`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `stock` (
+  `ProductID` varchar(20) DEFAULT NULL,
+  `AvailableStock` int(11) DEFAULT '0',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ProductID` (`ProductID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `stock`
+--
+
+LOCK TABLES `stock` WRITE;
+/*!40000 ALTER TABLE `stock` DISABLE KEYS */;
+INSERT INTO `stock` VALUES ('ISProd1',10,1),('ISProd2',25,2),('ISProd3',25,4),('ISProd4',40,5);
+/*!40000 ALTER TABLE `stock` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `supplier`
+--
+
+DROP TABLE IF EXISTS `supplier`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `supplier` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `SupplierName` varchar(30) DEFAULT NULL,
+  `MobileNo` varchar(10) DEFAULT NULL,
+  `EmailId` varchar(40) DEFAULT NULL,
+  `Address` varchar(200) DEFAULT NULL,
+  `GSTINNo` varchar(15) DEFAULT NULL,
+  `AadharNo` varchar(12) DEFAULT NULL,
+  `SupplierID` varchar(30) DEFAULT NULL,
+  `Dues` decimal(10,2) DEFAULT '0.00',
+  `Active` tinyint(1) DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `supplier`
+--
+
+LOCK TABLES `supplier` WRITE;
+/*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
+INSERT INTO `supplier` VALUES (1,'Aman Manmode','9890700119','manmodeas@gmail.com','sfasdf asdf asd f sad fsda','12KJHGF1234G1G3','123987456987','ISSUP1','762.50',1),(2,'Apurv Dey','8765436578','345676456543','sjhdgksjd fgkhfdgk sdfkg		','23JHGFD3456F1F5','345676456543','ISSUP2','711.90',1);
+/*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `supplierduesmanagement`
+--
+
+DROP TABLE IF EXISTS `supplierduesmanagement`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `supplierduesmanagement` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `SupplierID` varchar(45) DEFAULT NULL,
+  `DateofDue` date DEFAULT NULL,
+  `Due` decimal(10,2) DEFAULT NULL,
+  `PaidAt` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `supplierduesmanagement`
+--
+
+LOCK TABLES `supplierduesmanagement` WRITE;
+/*!40000 ALTER TABLE `supplierduesmanagement` DISABLE KEYS */;
+/*!40000 ALTER TABLE `supplierduesmanagement` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `transactiontable`
+--
+
+DROP TABLE IF EXISTS `transactiontable`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `transactiontable` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `UserType` varchar(30) DEFAULT NULL,
+  `Name` varchar(30) DEFAULT NULL,
+  `Given` decimal(10,0) DEFAULT NULL,
+  `Taken` decimal(10,0) DEFAULT NULL,
+  `DateofTransaction` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `transactiontable`
+--
+
+LOCK TABLES `transactiontable` WRITE;
+/*!40000 ALTER TABLE `transactiontable` DISABLE KEYS */;
+INSERT INTO `transactiontable` VALUES (1,'NewPerson','Amit Badana2','0','100','2018-12-11'),(2,'NewPerson','Amit Badana2','100','0','2018-12-11'),(3,'Supplier','Apurv Dey','800','0','2018-12-13'),(4,'Supplier','Apurv Dey','800','0','2018-12-13'),(5,'Supplier','Aman Manmode','5000','0','2018-12-13'),(6,'Supplier','Apurv Dey','1000','0','2018-12-13'),(7,'Supplier','Apurv Dey','100','0','2018-12-13'),(8,'Customer','Babu Bhaiya','0','10','2018-12-13'),(9,'NewPerson','Aman Manmode','0','200','2018-12-13'),(10,'NewPerson','Aman Manmode','400','0','2018-12-13'),(11,'NewPerson','Aman Manmode','800','0','2018-12-13'),(12,'NewPerson','Aman Manmode','1000','0','2018-12-13');
+/*!40000 ALTER TABLE `transactiontable` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-12-18 14:55:10
